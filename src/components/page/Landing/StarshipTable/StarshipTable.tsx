@@ -1,6 +1,18 @@
 import { FC, useState, useMemo, useCallback, useEffect } from "react";
 import { IconFilter, IconFilterOff, IconSearch } from "@tabler/icons-react";
-import { Center, Flex, Pagination, Table, Text, TextInput, UnstyledButton, Button, Skeleton, Paper } from "@mantine/core";
+import {
+    Center,
+    Flex,
+    Pagination,
+    Table,
+    Text,
+    TextInput,
+    UnstyledButton,
+    Button,
+    Skeleton,
+    Paper,
+    Group,
+} from "@mantine/core";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { FilterInput } from "./inner/FilterInput";
@@ -182,7 +194,7 @@ export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPa
 
     return (
         <Paper radius="md" withBorder p="md">
-            <Flex align="center" justify="space-between" mb="md">
+            <Group align="center" position="apart" mb="md">
                 <TextInput
                     placeholder="Search"
                     icon={<IconSearch size={16} stroke={1.5} />}
@@ -193,9 +205,9 @@ export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPa
                 <UnstyledButton onClick={() => setDisplayFilters((prev) => !prev)}>
                     {displayFilters ? <IconFilterOff size={20} stroke={1.5} /> : <IconFilter size={20} stroke={1.5} />}
                 </UnstyledButton>
-            </Flex>
+            </Group>
 
-            <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} highlightOnHover striped>
+            <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} highlightOnHover={!isLoading} striped>
                 <thead>
                     <tr>
                         <Th
@@ -285,7 +297,7 @@ export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPa
                     ) : (
                         <tr>
                             <td colSpan={6}>
-                                <Text fw={500} ta="center" c="gray">
+                                <Text fw={500} ta="center" c="dimmed">
                                     Nothing found
                                 </Text>
                             </td>

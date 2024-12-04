@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Skeleton, Text, Title } from "@mantine/core";
+import { Box, Grid, Group, Skeleton, Text, Title } from "@mantine/core";
 import { FC } from "react";
 import { MovieCard } from "./inner/MovieCard";
 import { FilmData } from "../../../../types";
@@ -27,7 +27,7 @@ export const Films: FC<FilmsProps> = ({ data, isLoading }) => {
             )}
 
             {isLoading ? (
-                <Flex gap={20}>
+                <Group spacing="lg">
                     {[...Array(4)].map((_, index) => (
                         <Box key={index}>
                             <Skeleton height={250} width={200} radius="md" />
@@ -35,7 +35,7 @@ export const Films: FC<FilmsProps> = ({ data, isLoading }) => {
                             <Skeleton height={15} width={100} mt="xs" />
                         </Box>
                     ))}
-                </Flex>
+                </Group>
             ) : data.length > 0 ? (
                 <Grid>
                     {data.map((film, index) => (

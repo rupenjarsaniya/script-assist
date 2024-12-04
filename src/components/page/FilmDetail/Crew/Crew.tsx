@@ -1,4 +1,4 @@
-import { Box, Flex, Skeleton, Stack, Title } from "@mantine/core";
+import { Box, Group, Skeleton, Stack, Title } from "@mantine/core";
 import { FC } from "react";
 import { CharacterCard } from "../inner/CharacterCard";
 
@@ -10,11 +10,11 @@ interface CastProps {
 
 export const Crew: FC<CastProps> = ({ directorName, producerName, isLoading }) => {
     return (
-        <Box mt="xl">
+        <Box>
             <Title order={3} weight={600} mb="lg">
                 {isLoading ? <Skeleton height={20} width="30%" /> : "Crew"}
             </Title>
-            <Flex gap={20}>
+            <Group spacing="lg">
                 {isLoading ? (
                     [...Array(2)].map((_, index) => (
                         <Stack align="center" key={index}>
@@ -28,7 +28,7 @@ export const Crew: FC<CastProps> = ({ directorName, producerName, isLoading }) =
                         <CharacterCard name={producerName} designation="Producer" />
                     </>
                 )}
-            </Flex>
+            </Group>
         </Box>
     );
 };

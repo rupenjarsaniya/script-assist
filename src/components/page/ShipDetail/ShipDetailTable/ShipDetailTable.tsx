@@ -2,6 +2,7 @@ import { Skeleton, Table } from "@mantine/core";
 import { FC } from "react";
 import { StarshipData } from "../../../../types";
 import { TableRow } from "./inner/TableRow";
+import classes from "./ShipDetailTable.module.scss";
 
 interface ShipDetailTableProps {
     data: Pick<
@@ -13,7 +14,7 @@ interface ShipDetailTableProps {
 
 export const ShipDetailTable: FC<ShipDetailTableProps> = ({ data, isLoading }) => {
     return (
-        <Table highlightOnHover={isLoading} withColumnBorders={false} withBorder={false} style={{ flex: 1 }}>
+        <Table highlightOnHover={!isLoading} withColumnBorders={false} withBorder={false} className={classes.root}>
             <tbody>
                 {isLoading ? (
                     [...Array(6)].map((_, index) => (

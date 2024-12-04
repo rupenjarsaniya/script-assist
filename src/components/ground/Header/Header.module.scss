@@ -1,20 +1,13 @@
 .header {
-    height: 56px;
-    background-color: white;
-    position: sticky;
-    top: 0;
-    z-index: 100;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    display: flex;
     align-items: center;
 }
 
 .link {
     line-height: 1;
     padding: 2px 8px;
-    border-radius: 10px;
+    border-radius: 6px;
     text-decoration: none;
-    color: green;
 
     &_active {
         background-color: #3d4c7e;

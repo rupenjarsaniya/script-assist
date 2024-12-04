@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, Flex, Grid, Text, Title } from "@mantine/core";
+import { Avatar, Box, Card, Flex, Grid, Group, Text, Title } from "@mantine/core";
 import { FC } from "react";
 import { PeopleData } from "../../../../../../types";
 import { generateRandomNumber } from "../../../../../../utils/fn";
@@ -28,7 +28,7 @@ export const ProfileCard: FC<ProfileCardProps> = ({ gender, height, mass, name }
                 <Title order={5} mt="md" align="center">
                     {name}
                 </Title>
-                <Flex mt="md" justify="center" gap={30}>
+                <Group mt="md" position="center" spacing={30}>
                     <Box>
                         <Text ta="center" fz="sm" fw={500}>
                             {height}
@@ -53,7 +53,7 @@ export const ProfileCard: FC<ProfileCardProps> = ({ gender, height, mass, name }
                             Gender
                         </Text>
                     </Box>
-                </Flex>
+                </Group>
             </Card>
         </Grid.Col>
     );

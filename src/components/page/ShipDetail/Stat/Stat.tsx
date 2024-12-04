@@ -2,6 +2,7 @@ import { Box, Center, Flex, Paper, Skeleton, Stack, Text, ThemeIcon } from "@man
 import { IconArrowDownRight, IconArrowUpRight } from "@tabler/icons-react";
 import { FC } from "react";
 import { generateRandomNumber } from "../../../../utils/fn";
+import classes from "./Stat.module.scss";
 
 const icons = {
     up: IconArrowUpRight,
@@ -19,7 +20,7 @@ export const Stat: FC<StatProps> = ({ title, value, isLoading }) => {
     const Icon = percentage > 0 ? icons.up : icons.down;
 
     return (
-        <Paper withBorder p="md" radius="md" style={{ flex: 1 }}>
+        <Paper withBorder p="md" radius="md" className={classes.root}>
             {isLoading || Boolean(value) ? (
                 <>
                     <Flex gap={20}>

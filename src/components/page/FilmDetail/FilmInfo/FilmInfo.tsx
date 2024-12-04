@@ -1,4 +1,4 @@
-import { Box, clsx, Flex, Image, Paper, Skeleton, Text, Title } from "@mantine/core";
+import { clsx, Group, Image, Paper, Skeleton, Stack, Text, Title } from "@mantine/core";
 import moment from "moment";
 import { FC } from "react";
 import { FilmData } from "../../../../types";
@@ -11,9 +11,9 @@ interface FilmInfoProps {
 
 export const FilmInfo: FC<FilmInfoProps> = ({ film, isLoading }) => {
     return (
-        <Box className={clsx([classes.bg, { [classes.bgImage]: !isLoading }])} my="lg">
-            <Flex px={100} align="center" gap={40} h={"100%"}>
-                <Paper className={classes.poster} radius="md">
+        <Paper className={clsx([classes.bg, { [classes.bgImage]: !isLoading }])} mt="lg" h={400} pos="relative" radius="md">
+            <Group px={100} align="center" spacing={40} h={"100%"}>
+                <Paper className={classes.poster} radius="md" pos="relative">
                     {isLoading ? (
                         <Skeleton height={300} width={220} />
                     ) : (
@@ -22,12 +22,22 @@ export const FilmInfo: FC<FilmInfoProps> = ({ film, isLoading }) => {
                     {isLoading ? (
                         <Skeleton height={20} mt="md" width="60%" />
                     ) : (
-                        <Text align="center" mt="md" c="white" size="xs" className={classes.releaseDate}>
+                        <Text
+                            align="center"
+                            mt="md"
+                            c="white"
+                            size="xs"
+                            pos="absolute"
+                            bottom={0}
+                            left={0}
+                            right={0}
+                            bg="rgba(0, 0, 0, 0.5)"
+                        >
                             Released on {moment(film?.release_date).format("MMMM DD, YYYY")}
                         </Text>
                     )}
                 </Paper>
-                <Box style={{ flex: 1 }}>
+                <Stack className={classes.filmWrapper} spacing="lg">
                     {isLoading ? (
                         <Skeleton height={40} width="80%" />
                     ) : (
@@ -36,21 +46,21 @@ export const FilmInfo: FC<FilmInfoProps> = ({ film, isLoading }) => {
                         </Title>
                     )}
                     {isLoading ? (
-                        <Skeleton height={60} mt="md" width="90%" />
+                        <Skeleton height={60} width="90%" />
                     ) : (
-                        <Text size="sm" mt="md" c="white">
+                        <Text size="sm" c="white">
                             {film?.opening_crawl}
                         </Text>
                     )}
                     {isLoading ? (
-                        <Skeleton height={20} mt="sm" width="40%" />
+                        <Skeleton height={20} width="40%" />
                     ) : (
-                        <Text size="xs" mt="sm" c="dimmed">
+                        <Text size="xs" c="dimmed">
                             3h 20m • Action, Thriller • UA
                         </Text>
                     )}
-                </Box>
-            </Flex>
-        </Box>
+                </Stack>
+            </Group>
+        </Paper>
     );
 };

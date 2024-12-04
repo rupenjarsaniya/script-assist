@@ -1,10 +1,11 @@
 import { FC, useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { Card, Text, Badge, Group, Divider, Title, Flex, Skeleton } from "@mantine/core";
+import { Card, Text, Badge, Group, Divider, Title, Flex, Skeleton, Stack, Box } from "@mantine/core";
 import { useCustomQuery } from "../../hooks";
 import { getFilmById, getPeopleById, getStarShipById } from "../../services";
 import { BackButton, Films, HyperdriveRating, Pilots, ShipDetailTable, Stat } from "../../components";
 import { getIdFromUrl } from "../../utils/fn";
+import classes from "./ShipDetail.module.scss";
 
 const ShipDetail: FC = () => {
     const { starshipId } = useParams();
@@ -84,7 +85,7 @@ const ShipDetail: FC = () => {
     );
 
     return (
-        <>
+        <Box>
             {/* Back button */}
             <BackButton />
 
@@ -98,7 +99,7 @@ const ShipDetail: FC = () => {
                             {_starshipData?.name}
                         </Title>
                     )}
-                    <Flex gap={10}>
+                    <Group>
                         {isLoading ? (
                             <>
                                 <Skeleton width={100} height={20} />
@@ -112,7 +113,7 @@ const ShipDetail: FC = () => {
                                 <Badge color="yellow">Speed: {_starshipData?.MGLT} MGLT</Badge>
                             </>
                         )}
-                    </Flex>
+                    </Group>
                 </Group>
 
                 {isLoading ? (
@@ -125,25 +126,25 @@ const ShipDetail: FC = () => {
 
                 <Divider my="lg" />
 
-                <Flex gap={20}>
+                <Group spacing="lg">
                     <ShipDetailTable data={_starshipData} isLoading={isLoading} />
-                    <Flex direction="column" gap={20} style={{ flex: 1 }}>
+                    <Stack className={classes.statWraper} spacing="lg">
                         <HyperdriveRating
                             config={[hyperdriveConfig]}
                             icon="up"
                             value={_starshipData?.hyperdrive_rating || "0"}
                             isLoading={isLoading}
                         />
-                        <Flex gap={20}>
+                        <Group spacing="lg">
                             <Stat
                                 title="Cost in credits"
                                 value={Number(_starshipData?.cost_in_credits || 0)}
                                 isLoading={isLoading}
                             />
                             <Stat title="Passengers" value={Number(_starshipData?.passengers || 0)} isLoading={isLoading} />
-                        </Flex>
-                    </Flex>
-                </Flex>
+                        </Group>
+                    </Stack>
+                </Group>
             </Card>
 
             {/* Pilots Section */}
@@ -153,7 +154,7 @@ const ShipDetail: FC = () => {
 
             {/* Films Section */}
             <Films data={_filmData} isLoading={isLoading} />
-        </>
+        </Box>
     );
 };
 

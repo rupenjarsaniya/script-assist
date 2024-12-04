@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Skeleton, Text } from "@mantine/core";
+import { Box, Grid, Group, Skeleton, Text } from "@mantine/core";
 import { FC } from "react";
 import { ProfileCard } from "./inner/ProfileCard";
 import { PeopleData } from "../../../../types";
@@ -20,11 +20,11 @@ export const Pilots: FC<PilotsProps> = ({ data, isLoading }) => {
             )}
 
             {isLoading ? (
-                <Flex gap={20}>
+                <Group spacing="lg">
                     {[...Array(4)].map((_, index) => (
-                        <Skeleton key={index} height={250} width={150} radius="md" />
+                        <Skeleton key={index} height={300} width={250} radius="md" />
                     ))}
-                </Flex>
+                </Group>
             ) : data.length > 0 ? (
                 <Grid>
                     {data.map((pilot, index) => (

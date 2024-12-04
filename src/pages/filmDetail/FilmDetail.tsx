@@ -1,4 +1,4 @@
-import { Divider } from "@mantine/core";
+import { Divider, Stack } from "@mantine/core";
 import { FC, useMemo } from "react";
 import { getIdFromUrl } from "../../utils/fn";
 import { useCustomQuery } from "../../hooks";
@@ -35,17 +35,17 @@ const FilmDetail: FC = () => {
     const isLoading = useMemo(() => isFilmLoading || isCharacterLoading, [isFilmLoading, isCharacterLoading]);
 
     return (
-        <>
+        <Stack spacing="lg">
             <BackButton />
 
             <FilmInfo isLoading={isLoading} film={_film} />
 
             <Cast characterData={_characterData} isLoading={isLoading} />
 
-            <Divider mt="xl" mb="xl" />
+            <Divider />
 
             <Crew directorName={_film?.director} producerName={_film?.producer} isLoading={isLoading} />
-        </>
+        </Stack>
     );
 };
 

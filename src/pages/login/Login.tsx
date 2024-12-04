@@ -1,11 +1,10 @@
-import { Anchor, Button, Container, Flex, Paper, PasswordInput, Text, TextInput, Title } from "@mantine/core";
+import { Anchor, Button, Container, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 import { ChangeEvent, FC, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
 import { useAppStore } from "../../store/app.store";
-import s from "./Login.module.scss";
 
-export default function Login() {
+const Login: FC = () => {
     const [form, setForm] = useState({ email: "", password: "" });
     const navigate = useNavigate();
     const { login } = useAppStore();
@@ -39,12 +38,12 @@ export default function Login() {
             <Text c="dimmed" size="sm" ta="center" mt={5}>
                 Do not have an account yet?{" "}
                 <Anchor size="sm" component="button">
-                    Create account
+                    Lorem, ipsum.
                 </Anchor>
             </Text>
 
-            <Paper shadow="md" p={30} mt={30} radius="md" className={s.paper}>
-                <Flex gap="md" direction="column">
+            <Paper shadow="md" p={30} mt={30} radius="md" withBorder bg="#3D4C7E">
+                <Stack spacing={0}>
                     <TextInput
                         name="email"
                         value={form.email}
@@ -61,12 +60,15 @@ export default function Login() {
                         onChange={handleSetValue}
                         required
                         mt="md"
+                        mb="xl"
                     />
-                    <Button fullWidth mt="xl" onClick={handleLogin} disabled={isDisabled}>
+                    <Button mt="xl" onClick={handleLogin} disabled={isDisabled}>
                         Sign in
                     </Button>
-                </Flex>
+                </Stack>
             </Paper>
         </Container>
     );
-}
+};
+
+export default Login;

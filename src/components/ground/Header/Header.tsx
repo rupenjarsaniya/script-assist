@@ -1,4 +1,4 @@
-import { Header, Container, Text, Flex, clsx } from "@mantine/core";
+import { Header, Container, Text, Flex, clsx, Group } from "@mantine/core";
 import classes from "./Header.module.scss";
 import { ProfileButton } from "./inner/ProfileButton";
 import { useEffect, useState } from "react";
@@ -34,8 +34,8 @@ export const AppHeader = () => {
     }, [pathname]);
 
     return (
-        <Header height={70} px="md" className={classes.header}>
-            <Container w={"100%"} size="xl">
+        <Header height={56} px="md" className={classes.header} bg="white" pos="sticky" top={0} zIndex={100} display="flex">
+            <Container w="100%" size="xl">
                 <Flex align="center" justify="space-between">
                     {/* Logo */}
                     <Text weight={700} size="xl">
@@ -43,7 +43,7 @@ export const AppHeader = () => {
                     </Text>
 
                     {/* Menu */}
-                    <Flex gap={5}>{items}</Flex>
+                    <Group spacing="sm">{items}</Group>
 
                     {/* Profile Section */}
                     <ProfileButton />

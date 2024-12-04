@@ -1,7 +1,7 @@
-import { Center, Flex, Text, TextInput, UnstyledButton } from "@mantine/core";
+import { Center, Group, Text, UnstyledButton } from "@mantine/core";
 import { FC, ReactNode } from "react";
 import classes from "./Th.module.scss";
-import { IconChevronDown, IconChevronUp, IconSelector, IconX } from "@tabler/icons-react";
+import { IconChevronDown, IconChevronUp, IconSelector } from "@tabler/icons-react";
 
 interface ThProps {
     children: ReactNode;
@@ -19,7 +19,7 @@ export const Th: FC<ThProps> = ({ children, reversed, sorted, onSort, width, fil
     return (
         <th className={classes.th} style={{ width }}>
             <UnstyledButton onClick={onSort} className={classes.control}>
-                <Flex justify="space-between">
+                <Group position="apart">
                     <Text fw={500} fz="sm">
                         {children}
                     </Text>
@@ -28,7 +28,7 @@ export const Th: FC<ThProps> = ({ children, reversed, sorted, onSort, width, fil
                             <Icon size={16} stroke={1.5} />
                         </Center>
                     )}
-                </Flex>
+                </Group>
             </UnstyledButton>
             {filter}
         </th>

@@ -1,4 +1,4 @@
-import { Avatar, Flex, Menu, Text, UnstyledButton } from "@mantine/core";
+import { Avatar, Group, Menu, Text, UnstyledButton } from "@mantine/core";
 import { IconChevronDown, IconLogout2 } from "@tabler/icons-react";
 import { FC, useState } from "react";
 import s from "./ProfileButton.module.scss";
@@ -28,8 +28,8 @@ export const ProfileButton: FC = () => {
             withinPortal
         >
             <Menu.Target>
-                <UnstyledButton className={s.user}>
-                    <Flex gap={7} align={"center"}>
+                <UnstyledButton className={s.user} px="md" py="sm" bg="#E2E4F0">
+                    <Group spacing={7} align={"center"}>
                         <Avatar
                             src={"https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-9.png"}
                             alt={user?.name}
@@ -40,7 +40,7 @@ export const ProfileButton: FC = () => {
                             {user?.name}
                         </Text>
                         <IconChevronDown size={12} stroke={1.5} />
-                    </Flex>
+                    </Group>
                 </UnstyledButton>
             </Menu.Target>
             <Menu.Dropdown>

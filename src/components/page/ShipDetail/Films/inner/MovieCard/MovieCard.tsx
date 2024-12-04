@@ -1,4 +1,4 @@
-import { Box, Grid, Image, Text, Title, UnstyledButton } from "@mantine/core";
+import { Grid, Image, Text, Title, UnstyledButton } from "@mantine/core";
 import { FC } from "react";
 
 interface MovieCardProps {
