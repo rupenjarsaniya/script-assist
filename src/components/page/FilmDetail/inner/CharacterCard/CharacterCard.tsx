@@ -1,6 +1,6 @@
 import { Box, Flex, Image, Text } from "@mantine/core";
 import { FC } from "react";
-import { generateRandomNumber } from "../../../../utils/fn";
+import { generateRandomNumber } from "../../../../../utils/fn";
 
 interface CharacterCardProps {
     name: string;

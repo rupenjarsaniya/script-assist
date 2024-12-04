@@ -1,1 +1,3 @@
-export * from "./CharacterCard";
+export * from "./Cast";
+export * from "./Crew";
+export * from "./FilmInfo";

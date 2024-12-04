@@ -1,15 +1,13 @@
 import { FC, useMemo } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Card, Text, Badge, Group, Divider, Title, Flex, Skeleton } from "@mantine/core";
 import { useCustomQuery } from "../../hooks";
 import { getFilmById, getPeopleById, getStarShipById } from "../../services";
-import { Films, HyperdriveRating, Loader, Pilots, ShipDetailTable, Stat } from "../../components";
+import { BackButton, Films, HyperdriveRating, Pilots, ShipDetailTable, Stat } from "../../components";
 import { getIdFromUrl } from "../../utils/fn";
-import { IconArrowNarrowLeft } from "@tabler/icons-react";
 
 const ShipDetail: FC = () => {
     const { starshipId } = useParams();
-    const navigate = useNavigate();
 
     const { data: starshipData, isLoading: isStarshipLoading } = useCustomQuery({
         queryFn: getStarShipById,
@@ -51,11 +49,7 @@ const ShipDetail: FC = () => {
         enabled: !!_starshipData?.films?.length,
     });
 
-    const _pilotData = useMemo(() => {
-        if (!pilotData) return [];
-
-        return pilotData.map((pilot) => pilot.data);
-    }, [pilotData]);
+    const _pilotData = useMemo(() => (!pilotData ? [] : pilotData.map((pilot) => pilot.data)), [pilotData]);
 
     const _filmData = useMemo(() => {
         if (!filmData) return [];
@@ -92,12 +86,7 @@ const ShipDetail: FC = () => {
     return (
         <>
             {/* Back button */}
-            <Link to="/">
-                <Flex align="center" gap={3}>
-                    <IconArrowNarrowLeft size={30} stroke={1.5} />
-                    <Text size="md">Back</Text>
-                </Flex>
-            </Link>
+            <BackButton />
 
             {/* Ship detail card */}
             <Card shadow="sm" padding="lg" radius="md" my="lg" withBorder>
@@ -133,6 +122,7 @@ const ShipDetail: FC = () => {
                         {_starshipData?.model} by {_starshipData?.manufacturer}
                     </Text>
                 )}
+
                 <Divider my="lg" />
 
                 <Flex gap={20}>
@@ -156,10 +146,12 @@ const ShipDetail: FC = () => {
                 </Flex>
             </Card>
 
+            {/* Pilots Section */}
             <Pilots data={_pilotData} isLoading={isLoading} />
 
             <Divider my="lg" />
 
+            {/* Films Section */}
             <Films data={_filmData} isLoading={isLoading} />
         </>
     );

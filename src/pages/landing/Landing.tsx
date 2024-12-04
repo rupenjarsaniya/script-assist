@@ -5,7 +5,7 @@ import { getAllStarShips } from "../../services/api";
 import { StarshipData } from "../../types";
 import { StarshipTable } from "../../components";
 
-const LIMIT = 10;
+const LIMIT = 10; // NOTE: Number of items per page (We can't change this value because SWAPI doesn't support pagination)
 
 const Landing = () => {
     const [page, setPage] = useState(1);
@@ -39,10 +39,12 @@ const Landing = () => {
 
     return (
         <>
+            {/* Title component */}
             <Title align="center" weight={700} mb="lg">
                 Starships List
             </Title>
 
+            {/* StarshipTable component */}
             <StarshipTable data={filteredData} totalPages={totalPages} page={page} setPage={setPage} isLoading={isLoading} />
         </>
     );

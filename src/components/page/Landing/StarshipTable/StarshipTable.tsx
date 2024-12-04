@@ -91,15 +91,15 @@ interface StarshipTableProps {
 
 export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPages, page, setPage }) => {
     const [globalSearch, setGlobalSearch] = useState("");
+    const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
+    const [reverseSortDirection, setReverseSortDirection] = useState(false);
+    const [displayFilters, setDisplayFilters] = useState(false);
     const [filters, setFilters] = useState<Record<string, string>>({
         name: "",
         model: "",
         hyperdrive_rating: "",
         length: "",
     });
-    const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
-    const [reverseSortDirection, setReverseSortDirection] = useState(false);
-    const [displayFilters, setDisplayFilters] = useState(false);
 
     const filteredData = useMemo(
         () => (!data ? null : filterData(data, filters, globalSearch)),

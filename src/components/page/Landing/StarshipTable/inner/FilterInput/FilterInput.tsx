@@ -20,17 +20,12 @@ export const FilterInput: FC<FilterInputProps> = ({ placeholder, value, onChange
             value={value}
             onChange={(e) => onChange(e.currentTarget.value)}
             variant="unstyled"
-            classNames={{ root: classes.lineInput }}
+            classNames={{ root: classes.root, input: classes.input }}
             rightSection={
                 <UnstyledButton onClick={onClear}>
                     <IconX size={16} stroke={1.5} />
                 </UnstyledButton>
             }
-            styles={{
-                input: {
-                    fontSize: 14,
-                },
-            }}
         />
     );
 };
