@@ -1,10 +1,11 @@
-import { Anchor, Button, Container, Paper, PasswordInput, Text, TextInput, Title } from "@mantine/core";
+import { Anchor, Button, Container, Flex, Paper, PasswordInput, Text, TextInput, Title } from "@mantine/core";
 import { ChangeEvent, FC, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
 import { useAppStore } from "../../store/app.store";
+import s from "./Login.module.scss";
 
-const Login: FC = () => {
+export default function Login() {
     const [form, setForm] = useState({ email: "", password: "" });
     const navigate = useNavigate();
     const { login } = useAppStore();
@@ -34,40 +35,38 @@ const Login: FC = () => {
 
     return (
         <Container size={420} my={40}>
-            <Title ta="center" weight="bolder">
-                Welcome back!
-            </Title>
+            <Title ta="center">Welcome back!</Title>
             <Text c="dimmed" size="sm" ta="center" mt={5}>
-                Lorem ipsum dolor sit amet.
+                Do not have an account yet?{" "}
                 <Anchor size="sm" component="button">
                     Create account
                 </Anchor>
             </Text>
 
-            <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-                <TextInput
-                    name="email"
-                    value={form.email}
-                    label="Email"
-                    placeholder="you@mantine.dev"
-                    onChange={handleSetValue}
-                    required
-                />
-                <PasswordInput
-                    name="password"
-                    value={form.password}
-                    label="Password"
-                    placeholder="Your password"
-                    onChange={handleSetValue}
-                    required
-                    mt="md"
-                />
-                <Button fullWidth mt="xl" onClick={handleLogin} disabled={isDisabled}>
-                    Sign in
-                </Button>
+            <Paper shadow="md" p={30} mt={30} radius="md" className={s.paper}>
+                <Flex gap="md" direction="column">
+                    <TextInput
+                        name="email"
+                        value={form.email}
+                        label="Email"
+                        placeholder="you@mantine.dev"
+                        onChange={handleSetValue}
+                        required
+                    />
+                    <PasswordInput
+                        name="password"
+                        value={form.password}
+                        label="Password"
+                        placeholder="Your password"
+                        onChange={handleSetValue}
+                        required
+                        mt="md"
+                    />
+                    <Button fullWidth mt="xl" onClick={handleLogin} disabled={isDisabled}>
+                        Sign in
+                    </Button>
+                </Flex>
             </Paper>
         </Container>
     );
-};
-
-export default Login;
+}

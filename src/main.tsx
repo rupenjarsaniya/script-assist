@@ -7,6 +7,8 @@ import Login from "./pages/login/Login";
 import PrivateRoute from "./routes/PrivateRoute";
 import Landing from "./pages/landing/Landing";
 import ShipDetail from "./pages/shipDetail/ShipDetail";
+import FilmDetail from "./pages/filmDetail/FilmDetail";
+import About from "./pages/about/About";
 
 export const routes = [
     {
@@ -24,6 +26,14 @@ export const routes = [
                     {
                         path: "/starship/:starshipId",
                         element: <ShipDetail />,
+                    },
+                    {
+                        path: "/film-detail/:filmId",
+                        element: <FilmDetail />,
+                    },
+                    {
+                        path: "/about",
+                        element: <About />,
                     },
                 ],
             },

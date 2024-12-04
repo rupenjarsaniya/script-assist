@@ -1,36 +1,47 @@
-import { Box, Grid, Text } from "@mantine/core";
+import { Box, Flex, Grid, Skeleton, Text } from "@mantine/core";
 import { FC } from "react";
 import { ProfileCard } from "./inner/ProfileCard";
 import { PeopleData } from "../../../../types";
 
 interface PilotsProps {
-    data: Pick<PeopleData, "eye_color" | "gender" | "hair_color" | "height" | "mass" | "name" | "skin_color">[];
+    data: Pick<PeopleData, "gender" | "height" | "mass" | "name">[];
+    isLoading: boolean;
 }
 
-export const Pilots: FC<PilotsProps> = ({ data }) => {
+export const Pilots: FC<PilotsProps> = ({ data, isLoading }) => {
     return (
         <Box>
-            <Text weight={500} mb="xs">
-                Pilots:
-            </Text>
-            <Grid>
-                {data.length > 0 ? (
-                    data.map((pilot, index) => (
+            {isLoading ? (
+                <Skeleton height={20} width="30%" mb="lg" />
+            ) : (
+                <Text weight={500} mb="xs">
+                    Pilots
+                </Text>
+            )}
+
+            {isLoading ? (
+                <Flex gap={20}>
+                    {[...Array(4)].map((_, index) => (
+                        <Skeleton key={index} height={250} width={150} radius="md" />
+                    ))}
+                </Flex>
+            ) : data.length > 0 ? (
+                <Grid>
+                    {data.map((pilot, index) => (
                         <ProfileCard
-                            eye_color={pilot.eye_color}
                             gender={pilot.gender}
-                            hair_color={pilot.hair_color}
                             height={pilot.height}
                             mass={pilot.mass}
                             name={pilot.name}
-                            skin_color={pilot.skin_color}
                             key={index}
                         />
-                    ))
-                ) : (
-                    <Text color="dimmed">No known pilots</Text>
-                )}
-            </Grid>
+                    ))}
+                </Grid>
+            ) : (
+                <Text c="dimmed" size="sm">
+                    No known pilots
+                </Text>
+            )}
         </Box>
     );
 };

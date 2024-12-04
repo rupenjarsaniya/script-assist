@@ -44,7 +44,7 @@ export const ProfileButton: FC = () => {
                 </UnstyledButton>
             </Menu.Target>
             <Menu.Dropdown>
-                <Menu.Item color="red" icon={<IconLogout2 size={16} stroke={1.5} />} onClick={handleLogout}>
+                <Menu.Item c="red" icon={<IconLogout2 size={16} stroke={1.5} />} onClick={handleLogout}>
                     Logout
                 </Menu.Item>
             </Menu.Dropdown>

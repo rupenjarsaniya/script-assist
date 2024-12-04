@@ -1,57 +1,55 @@
-import { Box, Grid, Modal, Text } from "@mantine/core";
-import { FC, useState } from "react";
+import { Box, Flex, Grid, Skeleton, Text, Title } from "@mantine/core";
+import { FC } from "react";
 import { MovieCard } from "./inner/MovieCard";
-import { FilmDetail } from "./inner/FilmDetail";
 import { FilmData } from "../../../../types";
+import { useNavigate } from "react-router-dom";
 
 interface FilmsProps {
     data: FilmData[];
+    isLoading: boolean;
 }
 
-export const Films: FC<FilmsProps> = ({ data }) => {
-    const [opened, setOpened] = useState(false);
-    const [selectedFilm, setSelectedFilm] = useState<FilmData | null>(null);
+export const Films: FC<FilmsProps> = ({ data, isLoading }) => {
+    const navigate = useNavigate();
 
     const handleSelectFilm = (film: FilmData) => {
-        setSelectedFilm(film);
-        setOpened(true);
-    };
-
-    const handleClose = () => {
-        setSelectedFilm(null);
-        setOpened(false);
+        navigate(`/film-detail/${film.id}`);
     };
 
     return (
         <Box>
-            <Text weight={500} mb="xs">
-                Films:
-            </Text>
-            <Grid>
-                {data.length > 0 ? (
-                    data.map((film, index) => (
+            {isLoading ? (
+                <Skeleton height={20} width="30%" mb="lg" />
+            ) : (
+                <Title order={4} weight={500} mb="md">
+                    Films
+                </Title>
+            )}
+
+            {isLoading ? (
+                <Flex gap={20}>
+                    {[...Array(4)].map((_, index) => (
+                        <Box key={index}>
+                            <Skeleton height={250} width={200} radius="md" />
+                            <Skeleton height={20} width={150} mt="xs" />
+                            <Skeleton height={15} width={100} mt="xs" />
+                        </Box>
+                    ))}
+                </Flex>
+            ) : data.length > 0 ? (
+                <Grid>
+                    {data.map((film, index) => (
                         <MovieCard
-                            created={film.created}
-                            director={film.director}
-                            edited={film.edited}
                             episodeId={film.episode_id}
-                            openingCrawl={film.opening_crawl}
-                            producer={film.producer}
-                            releaseDate={film.release_date}
                             title={film.title}
                             onClick={() => handleSelectFilm(film)}
                             key={index}
                         />
-                    ))
-                ) : (
-                    <Text color="dimmed">No known films</Text>
-                )}
-            </Grid>
-
-            {/* Film detail modal */}
-            <Modal opened={opened} onClose={handleClose} title="Film Detail" size="xl" centered>
-                {selectedFilm && <FilmDetail film={selectedFilm} />}
-            </Modal>
+                    ))}
+                </Grid>
+            ) : (
+                <Text c="dimmed">No known films</Text>
+            )}
         </Box>
     );
 };

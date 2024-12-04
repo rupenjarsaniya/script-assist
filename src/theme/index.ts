@@ -8,7 +8,7 @@ export const theme: MantineThemeOverride = {
     fontFamilyMonospace: "Monaco, Courier, monospace",
     fontSizes: {
         // 16px
-        xs: "1rem", // 12px
+        xs: "0.875rem", // 12px
         sm: "1rem", // 14px
         md: "1.25rem", // 16px
         lg: "1.5rem", // 18px
@@ -69,16 +69,16 @@ export const theme: MantineThemeOverride = {
     },
     components: {
         TextInput: {
-            styles: {
+            styles: (theme, params, { variant }) => ({
                 label: {
                     fontSize: "1rem",
                     color: "#DCE7FCFF",
                 },
                 input: {
-                    borderRadius: "2rem !important",
-                    backgroundColor: "#DCE7FCFF",
+                    borderRadius: variant === "default" ? "2rem !important" : "",
+                    backgroundColor: variant === "default" ? "#DCE7FCFF" : "",
                 },
-            },
+            }),
         },
         PasswordInput: {
             styles: {
