@@ -1,6 +1,6 @@
 import { FC, useMemo } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Container, Card, Text, Badge, Group, Divider, Title, Flex, Skeleton } from "@mantine/core";
+import { Card, Text, Badge, Group, Divider, Title, Flex, Skeleton } from "@mantine/core";
 import { useCustomQuery } from "../../hooks";
 import { getFilmById, getPeopleById, getStarShipById } from "../../services";
 import { Films, HyperdriveRating, Loader, Pilots, ShipDetailTable, Stat } from "../../components";

@@ -1,8 +1,7 @@
-import { Table, Text } from "@mantine/core";
+import { Table } from "@mantine/core";
 import { FC } from "react";
 import { StarshipData } from "../../../../types";
 import { TableRow } from "./inner/TableRow";
-import moment from "moment";
 
 interface ShipDetailTableProps {
     data: Pick<

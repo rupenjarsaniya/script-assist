@@ -3,12 +3,8 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import App from "./App";
-import Login from "./pages/login/Login";
 import PrivateRoute from "./routes/PrivateRoute";
-import Landing from "./pages/landing/Landing";
-import ShipDetail from "./pages/shipDetail/ShipDetail";
-import FilmDetail from "./pages/filmDetail/FilmDetail";
-import About from "./pages/about/About";
+import { Landing, About, FilmDetail, Login, ShipDetail } from "./pages";
 
 export const routes = [
     {

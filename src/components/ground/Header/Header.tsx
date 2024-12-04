@@ -1,4 +1,4 @@
-import { Header, Container, Text, Flex, clsx, Skeleton } from "@mantine/core";
+import { Header, Container, Text, Flex, clsx } from "@mantine/core";
 import classes from "./Header.module.scss";
 import { ProfileButton } from "./inner/ProfileButton";
 import { useEffect, useState } from "react";

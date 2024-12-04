@@ -81,7 +81,7 @@ function highlightText(text: string, query: string): React.ReactNode {
     return parts.map((part, index) => (part.toLowerCase() === query.toLowerCase() ? <mark key={index}>{part}</mark> : part));
 }
 
-interface TableSortProps {
+interface StarshipTableProps {
     data: RowData[];
     isLoading: boolean;
     totalPages: number;
@@ -89,7 +89,7 @@ interface TableSortProps {
     setPage: (page: number) => void;
 }
 
-export const TableSort: FC<TableSortProps> = ({ data, isLoading, totalPages, page, setPage }) => {
+export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPages, page, setPage }) => {
     const [globalSearch, setGlobalSearch] = useState("");
     const [filters, setFilters] = useState<Record<string, string>>({
         name: "",
