@@ -1,10 +1,23 @@
 import { FC, useState, useMemo, useCallback, useEffect, ChangeEvent, ReactNode } from "react";
 import { IconFilter, IconFilterOff, IconSearch } from "@tabler/icons-react";
-import { Center, Pagination, Table, Text, TextInput, UnstyledButton, Button, Skeleton, Paper, Group } from "@mantine/core";
+import {
+    Center,
+    Pagination,
+    Table,
+    Text,
+    TextInput,
+    UnstyledButton,
+    Button,
+    Skeleton,
+    Paper,
+    Group,
+    Box,
+} from "@mantine/core";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { FilterInput } from "./inner/FilterInput";
 import { Th } from "./inner/Th";
+import classes from "./StarshipTable.module.scss";
 
 interface RowData {
     name: string;
@@ -103,13 +116,27 @@ export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPa
 
     const rows = sortedData.map((row) => (
         <tr key={row.id}>
-            <td width="20%">{highlightText(row.name, globalSearch)}</td>
-            <td width="25%">{highlightText(row.model, globalSearch)}</td>
+            <td width="20%">
+                <Text w={200} truncate="end">
+                    {highlightText(row.name, globalSearch)}
+                </Text>
+            </td>
+            <td width="25%">
+                <Text w={250} truncate="end">
+                    {highlightText(row.model, globalSearch)}
+                </Text>
+            </td>
             <td width="15%">{highlightText(row.hyperdrive_rating, globalSearch)}</td>
             <td width="15%">{highlightText(row.length.replace(/[,]/g, ""), globalSearch)}</td>
             <td width="15%">{highlightText(moment(row.created).format("DD MMM YYYY"), globalSearch)}</td>
             <td width="10%">
-                <Button size="xs" component={Link} to={`/starship/${row.id}`}>
+                <Button
+                    size="xs"
+                    variant="light"
+                    component={Link}
+                    to={`/starship/${row.id}`}
+                    classNames={{ label: classes.label }}
+                >
                     View
                 </Button>
             </td>
@@ -193,6 +220,7 @@ export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPa
                             reversed={reverseSortDirection}
                             onSort={() => setSorting("name")}
                             width="20%"
+                            text="Name"
                             filter={
                                 <FilterInput
                                     placeholder="Filter by Name"
@@ -202,14 +230,13 @@ export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPa
                                     visible={displayFilters}
                                 />
                             }
-                        >
-                            Name
-                        </Th>
+                        />
                         <Th
                             sorted={sortBy === "model"}
                             reversed={reverseSortDirection}
                             onSort={() => setSorting("model")}
                             width="25%"
+                            text="Model"
                             filter={
                                 <FilterInput
                                     placeholder="Filter by Model"
@@ -219,14 +246,13 @@ export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPa
                                     visible={displayFilters}
                                 />
                             }
-                        >
-                            Model
-                        </Th>
+                        />
                         <Th
                             sorted={sortBy === "hyperdrive_rating"}
                             reversed={reverseSortDirection}
                             onSort={() => setSorting("hyperdrive_rating")}
                             width="15%"
+                            text="Hyperdrive Rating"
                             filter={
                                 <FilterInput
                                     placeholder="Filter by Rating"
@@ -236,14 +262,13 @@ export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPa
                                     visible={displayFilters}
                                 />
                             }
-                        >
-                            Hyperdrive Rating
-                        </Th>
+                        />
                         <Th
                             sorted={sortBy === "length"}
                             reversed={reverseSortDirection}
                             onSort={() => setSorting("length")}
                             width="15%"
+                            text="Length"
                             filter={
                                 <FilterInput
                                     placeholder="Filter by Length"
@@ -253,18 +278,15 @@ export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPa
                                     visible={displayFilters}
                                 />
                             }
-                        >
-                            Length
-                        </Th>
+                        />
                         <Th
                             sorted={sortBy === "created"}
                             reversed={reverseSortDirection}
                             onSort={() => setSorting("created")}
                             width="15%"
-                        >
-                            Created
-                        </Th>
-                        <Th width="10%">Actions</Th>
+                            text="Created"
+                        />
+                        <Th width="10%" text="Actions" />
                     </tr>
                 </thead>
                 <tbody>

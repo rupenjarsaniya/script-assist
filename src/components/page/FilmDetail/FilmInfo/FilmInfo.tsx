@@ -17,7 +17,7 @@ export const FilmInfo: FC<FilmInfoProps> = ({ film, isLoading }) => {
                     {isLoading ? (
                         <Skeleton height={300} width={220} />
                     ) : (
-                        <Image src="https://placehold.co/80x120" alt="Star Wars" width={220} height={300} />
+                        <Image src="https://picsum.photos/200/300" alt="Star Wars" width={220} height={300} />
                     )}
                     {isLoading ? (
                         <Skeleton height={20} mt="md" width="60%" />

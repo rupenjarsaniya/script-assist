@@ -12,12 +12,9 @@ const PrivateRoute: FC = () => {
     }
 
     return (
-        <Box>
-            <AppHeader />
-            <Container size="xl" my="lg">
-                <Outlet />
-            </Container>
-        </Box>
+        <Container size="xl" my="lg">
+            <Outlet />
+        </Container>
     );
 };
 

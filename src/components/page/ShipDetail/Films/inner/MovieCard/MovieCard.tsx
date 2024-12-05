@@ -11,7 +11,7 @@ export const MovieCard: FC<MovieCardProps> = ({ title, episodeId, onClick }) => 
     return (
         <Grid.Col span={2}>
             <UnstyledButton onClick={onClick} w={"100%"}>
-                <Image src="https://placehold.co/250x350.png" alt="Star Wars" radius="md" height={250} />
+                <Image src="https://picsum.photos/200/300" alt="Star Wars" radius="md" height={250} />
                 <Title order={5} mt="md">
                     {title}
                 </Title>

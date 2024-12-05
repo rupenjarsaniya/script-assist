@@ -1,9 +1,10 @@
-import { Header, Container, Text, Flex, clsx, Group, Image } from "@mantine/core";
-import classes from "./Header.module.scss";
+import { Header, Container, Text, Flex, clsx, Group, Image, Badge } from "@mantine/core";
+import classes from "./AppHeader.module.scss";
 import { ProfileButton } from "./inner/ProfileButton";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import LogoPng from "../../../assets/logo.png";
+import { useAppStore } from "../../../store/app.store";
 
 const links = [
     { link: "/", label: "Home" },
@@ -13,6 +14,7 @@ const links = [
 export const AppHeader = () => {
     const [active, setActive] = useState("");
     const { pathname } = useLocation();
+    const user = useAppStore((state) => state.authState?.user);
 
     const items = links.map((link) => (
         <Link
@@ -39,13 +41,19 @@ export const AppHeader = () => {
             <Container w="100%" size="xl">
                 <Flex align="center" justify="space-between">
                     {/* Logo */}
-                    <Image src={LogoPng} alt="logo" width={150} />
+                    <Group>
+                        <Image src={LogoPng} alt="logo" width={150} />
+                        <Badge color="teal" variant="filled" size="sm">
+                            Interview
+                        </Badge>
+                    </Group>
 
                     {/* Menu */}
-                    <Group spacing="sm">{items}</Group>
+
+                    {user && <Group spacing="sm">{items}</Group>}
 
                     {/* Profile Section */}
-                    <ProfileButton />
+                    {user && <ProfileButton />}
                 </Flex>
             </Container>
         </Header>

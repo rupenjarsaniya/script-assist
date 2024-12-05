@@ -4,7 +4,7 @@ import classes from "./Th.module.scss";
 import { IconChevronDown, IconChevronUp, IconSelector } from "@tabler/icons-react";
 
 interface ThProps {
-    children: ReactNode;
+    text: string;
 
     reversed?: boolean;
     sorted?: boolean;
@@ -13,7 +13,7 @@ interface ThProps {
     filter?: ReactNode;
 }
 
-export const Th: FC<ThProps> = ({ children, reversed, sorted, onSort, width, filter }) => {
+export const Th: FC<ThProps> = ({ text, reversed, sorted, onSort, width, filter }) => {
     const Icon = sorted ? (reversed ? IconChevronUp : IconChevronDown) : IconSelector;
 
     return (
@@ -21,7 +21,7 @@ export const Th: FC<ThProps> = ({ children, reversed, sorted, onSort, width, fil
             <UnstyledButton onClick={onSort} className={classes.control}>
                 <Group position="apart">
                     <Text fw={500} fz="sm">
-                        {children}
+                        {text}
                     </Text>
                     {Boolean(onSort) && (
                         <Center>

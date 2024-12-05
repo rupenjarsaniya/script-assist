@@ -4,6 +4,7 @@ import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { theme } from "./theme";
 import "./App.scss";
+import { AppHeader } from "./components";
 
 export default function App() {
     const { pathname } = useLocation();
@@ -15,6 +16,7 @@ export default function App() {
     return (
         <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
             <Notifications />
+            <AppHeader />
             <Outlet />
         </MantineProvider>
     );

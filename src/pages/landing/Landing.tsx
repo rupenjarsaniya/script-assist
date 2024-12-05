@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Title } from "@mantine/core";
+import { Text, Title } from "@mantine/core";
 import { useCustomQuery } from "../../hooks";
 import { getAllStarShips } from "../../services/api";
 import { StarshipData } from "../../types";
@@ -28,7 +28,7 @@ const Landing = () => {
             return {
                 name: item.name,
                 model: item.model,
-                hyperdrive_rating: item.hyperdrive_rating,
+                hyperdrive_rating: item.hyperdrive_rating === "unknown" ? "0" : item.hyperdrive_rating,
                 length: item.length,
                 created: item.created,
                 id,
@@ -40,10 +40,16 @@ const Landing = () => {
 
     return (
         <>
-            {/* Title component */}
-            <Title align="center" weight={700} mb="lg">
-                Starships List
-            </Title>
+            {/* Title */}
+            <Title weight={700}>Starships List</Title>
+
+            {/* Description */}
+            <Text size="xs" mb="lg" c="dimmed">
+                Starships are advanced spacecraft designed for interstellar travel, exploration, and combat. They play a
+                critical role in the Star Wars universe, connecting distant planets, facilitating trade, and serving as
+                powerful tools in galactic conflicts. Each starship comes with unique characteristics such as size, speed,
+                weaponry, and hyperdrive capabilities, making them suited for various purposes.
+            </Text>
 
             {/* StarshipTable component */}
             <StarshipTable data={filteredData} totalPages={totalPages} page={page} setPage={setPage} isLoading={isLoading} />

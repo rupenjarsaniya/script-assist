@@ -1,5 +1,6 @@
 .bg {
     overflow: hidden;
+    z-index: 1;
 
     &::before {
         content: "";
@@ -27,6 +28,7 @@
 
 .poster {
     overflow: hidden;
+    background: transparent;
 }
 
 .filmWrapper {
