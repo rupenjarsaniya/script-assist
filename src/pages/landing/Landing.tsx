@@ -19,7 +19,7 @@ const Landing = () => {
     const totalPages = useMemo(() => Math.ceil((data?.data?.count || 0) / LIMIT), [data]);
 
     const filteredData = useMemo(() => {
-        if (!data?.data?.results) return null;
+        if (!data?.data?.results) return [];
 
         const results = data.data.results.map((item: StarshipData) => {
             const url = item.url.split("/");
@@ -30,6 +30,7 @@ const Landing = () => {
                 model: item.model,
                 hyperdrive_rating: item.hyperdrive_rating,
                 length: item.length,
+                created: item.created,
                 id,
             };
         });

@@ -1,4 +1,4 @@
-import { Box, Grid, Group, Skeleton, Text } from "@mantine/core";
+import { Box, Grid, Group, Skeleton, Text, Title } from "@mantine/core";
 import { FC } from "react";
 import { ProfileCard } from "./inner/ProfileCard";
 import { PeopleData } from "../../../../types";
@@ -14,9 +14,9 @@ export const Pilots: FC<PilotsProps> = ({ data, isLoading }) => {
             {isLoading ? (
                 <Skeleton height={20} width="30%" mb="lg" />
             ) : (
-                <Text weight={500} mb="xs">
+                <Title order={4} weight={500} mb="md">
                     Pilots
-                </Text>
+                </Title>
             )}
 
             {isLoading ? (

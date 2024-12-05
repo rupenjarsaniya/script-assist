@@ -1,9 +1,9 @@
 import { AxiosResponse } from "axios";
 import { axiosRequest, getConfig } from "../../utils/axios";
 import { API } from "../../utils/constants/api.constants";
-import { StarshipData } from "../../types";
+import { GetAllStarShipsVariables, GetStarShipByIdVariables, StarshipData, StarshipResponse } from "../../types";
 
-export const getAllStarShips = (variable: { page: number }): Promise<AxiosResponse> =>
+export const getAllStarShips = (variable: GetAllStarShipsVariables): Promise<AxiosResponse<StarshipResponse>> =>
     axiosRequest(
         getConfig({
             method: "GET",
@@ -12,10 +12,10 @@ export const getAllStarShips = (variable: { page: number }): Promise<AxiosRespon
         }),
     );
 
-export const getStarShipById = (variable: { id: string }): Promise<AxiosResponse<StarshipData>> =>
+export const getStarShipById = (variable: GetStarShipByIdVariables): Promise<AxiosResponse<StarshipData>> =>
     axiosRequest(
         getConfig({
             method: "GET",
-            suffix: `${API.STARSHIPS}/${Number(variable.id)}`,
+            suffix: `${API.STARSHIPS}/${variable.id}`,
         }),
     );

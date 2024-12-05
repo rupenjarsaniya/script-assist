@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text } from "@mantine/core";
+import { Box, Image, Stack, Text } from "@mantine/core";
 import { FC } from "react";
 import { generateRandomNumber } from "../../../../../utils/fn";
 
@@ -11,7 +11,7 @@ export const CharacterCard: FC<CharacterCardProps> = ({ name, designation }) => 
     const avatarId = generateRandomNumber(1, 10);
 
     return (
-        <Flex align="center" direction="column" w={150} gap={10}>
+        <Stack align="center" spacing="sm">
             <Image
                 src={`https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-${avatarId}.png`}
                 alt={name}
@@ -20,7 +20,7 @@ export const CharacterCard: FC<CharacterCardProps> = ({ name, designation }) => 
                 radius={99}
             />
             <Box>
-                <Text size="sm" align="center">
+                <Text size="sm" align="center" truncate="end" w={100}>
                     {name}
                 </Text>
                 {designation && (
@@ -29,6 +29,6 @@ export const CharacterCard: FC<CharacterCardProps> = ({ name, designation }) => 
                     </Text>
                 )}
             </Box>
-        </Flex>
+        </Stack>
     );
 };

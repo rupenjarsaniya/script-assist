@@ -1,11 +1,10 @@
 import { FC, useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { Card, Text, Badge, Group, Divider, Title, Flex, Skeleton, Stack, Box } from "@mantine/core";
+import { Divider, Box } from "@mantine/core";
 import { useCustomQuery } from "../../hooks";
 import { getFilmById, getPeopleById, getStarShipById } from "../../services";
-import { BackButton, Films, HyperdriveRating, Pilots, ShipDetailTable, Stat } from "../../components";
+import { BackButton, Films, Pilots, ShipDetailCard } from "../../components";
 import { getIdFromUrl } from "../../utils/fn";
-import classes from "./ShipDetail.module.scss";
 
 const ShipDetail: FC = () => {
     const { starshipId } = useParams();
@@ -39,13 +38,13 @@ const ShipDetail: FC = () => {
     }, [starshipData]);
 
     const { data: pilotData, isLoading: isPilotLoading } = useCustomQuery({
-        queryFn: async () => Promise.all(_starshipData?.pilotIds.map((id: string) => getPeopleById({ id })) || []),
+        queryFn: async () => Promise.all((_starshipData?.pilotIds || []).map((id: string) => getPeopleById({ id })) || []),
         queryKey: ["getPilotData"],
         enabled: !!_starshipData?.pilots?.length,
     });
 
     const { data: filmData, isLoading: isFilmLoading } = useCustomQuery({
-        queryFn: async () => Promise.all(_starshipData?.filmIds.map((id: string) => getFilmById({ id })) || []),
+        queryFn: async () => Promise.all((_starshipData?.filmIds || []).map((id: string) => getFilmById({ id })) || []),
         queryKey: ["getFilmData"],
         enabled: !!_starshipData?.films?.length,
     });
@@ -90,69 +89,14 @@ const ShipDetail: FC = () => {
             <BackButton />
 
             {/* Ship detail card */}
-            <Card shadow="sm" padding="lg" radius="md" my="lg" withBorder>
-                <Group position="apart">
-                    {isLoading ? (
-                        <Skeleton width={100} height={40} />
-                    ) : (
-                        <Title order={2} weight={600}>
-                            {_starshipData?.name}
-                        </Title>
-                    )}
-                    <Group>
-                        {isLoading ? (
-                            <>
-                                <Skeleton width={100} height={20} />
-                                <Skeleton width={100} height={20} />
-                                <Skeleton width={100} height={20} />
-                            </>
-                        ) : (
-                            <>
-                                <Badge color="green">Class: {_starshipData?.starship_class}</Badge>
-                                <Badge color="blue">Hyperdrive: {_starshipData?.hyperdrive_rating}</Badge>
-                                <Badge color="yellow">Speed: {_starshipData?.MGLT} MGLT</Badge>
-                            </>
-                        )}
-                    </Group>
-                </Group>
+            <ShipDetailCard isLoading={isLoading} hyperdriveConfig={hyperdriveConfig} starshipData={_starshipData} />
 
-                {isLoading ? (
-                    <Skeleton width="100%" height={20} mt="sm" />
-                ) : (
-                    <Text size="sm" c="dimmed">
-                        {_starshipData?.model} by {_starshipData?.manufacturer}
-                    </Text>
-                )}
-
-                <Divider my="lg" />
-
-                <Group spacing="lg">
-                    <ShipDetailTable data={_starshipData} isLoading={isLoading} />
-                    <Stack className={classes.statWraper} spacing="lg">
-                        <HyperdriveRating
-                            config={[hyperdriveConfig]}
-                            icon="up"
-                            value={_starshipData?.hyperdrive_rating || "0"}
-                            isLoading={isLoading}
-                        />
-                        <Group spacing="lg">
-                            <Stat
-                                title="Cost in credits"
-                                value={Number(_starshipData?.cost_in_credits || 0)}
-                                isLoading={isLoading}
-                            />
-                            <Stat title="Passengers" value={Number(_starshipData?.passengers || 0)} isLoading={isLoading} />
-                        </Group>
-                    </Stack>
-                </Group>
-            </Card>
-
-            {/* Pilots Section */}
+            {/* Pilots section */}
             <Pilots data={_pilotData} isLoading={isLoading} />
 
             <Divider my="lg" />
 
-            {/* Films Section */}
+            {/* Films section */}
             <Films data={_filmData} isLoading={isLoading} />
         </Box>
     );

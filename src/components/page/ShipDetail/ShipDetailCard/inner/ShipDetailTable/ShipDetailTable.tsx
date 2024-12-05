@@ -1,6 +1,6 @@
 import { Skeleton, Table } from "@mantine/core";
 import { FC } from "react";
-import { StarshipData } from "../../../../types";
+import { StarshipData } from "../../../../../../types";
 import { TableRow } from "./inner/TableRow";
 import classes from "./ShipDetailTable.module.scss";
 
@@ -18,7 +18,7 @@ export const ShipDetailTable: FC<ShipDetailTableProps> = ({ data, isLoading }) =
             <tbody>
                 {isLoading ? (
                     [...Array(6)].map((_, index) => (
-                        <tr>
+                        <tr key={index}>
                             <td>
                                 <Skeleton width={100} height={20} />
                             </td>

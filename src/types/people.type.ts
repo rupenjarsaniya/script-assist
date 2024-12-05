@@ -16,3 +16,7 @@ export interface PeopleData {
     url: string;
     vehicles: string[];
 }
+
+export interface GetPeopleByIdVariable {
+    id: string;
+}

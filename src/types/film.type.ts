@@ -13,6 +13,10 @@ export interface FilmData {
     title: string;
     url: string;
     vehicles: string[];
+    id?: string;
+    characterIds?: string[];
+}
+
+export interface GetFilmByIdVariable {
     id: string;
-    characterIds: string[];
 }

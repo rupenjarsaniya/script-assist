@@ -1,20 +1,20 @@
-import { Box, Flex, Group, Skeleton, Stack, Text, Title } from "@mantine/core";
+import { Box, Group, Skeleton, Stack, Text, Title } from "@mantine/core";
 import { FC } from "react";
-import { PeopleData } from "../../../../types";
 import { CharacterCard } from "../inner/CharacterCard";
+import classes from "./Cast.module.scss";
 
 interface CastProps {
     isLoading: boolean;
-    characterData: Pick<PeopleData, "name">[];
+    characters: string[];
 }
 
-export const Cast: FC<CastProps> = ({ characterData, isLoading }) => {
+export const Cast: FC<CastProps> = ({ characters, isLoading }) => {
     return (
         <Box>
             <Title order={3} weight={600} mb="lg">
                 {isLoading ? <Skeleton height={20} width="30%" /> : "Cast"}
             </Title>
-            <Group spacing="lg">
+            <Group noWrap className={classes.overflow} spacing={40} align="start">
                 {isLoading ? (
                     [...Array(4)].map((_, index) => (
                         <Stack align="center" key={index}>
@@ -22,10 +22,12 @@ export const Cast: FC<CastProps> = ({ characterData, isLoading }) => {
                             <Skeleton height={20} width={100} mt="xs" />
                         </Stack>
                     ))
-                ) : characterData.length > 0 ? (
-                    characterData.map((character, index) => <CharacterCard name={character.name} key={index} />)
+                ) : characters.length > 0 ? (
+                    characters.map((character, index) => <CharacterCard name={character} key={index} />)
                 ) : (
-                    <Text c="dimmed">No known characters</Text>
+                    <Text c="dimmed" size="sm">
+                        No known characters
+                    </Text>
                 )}
             </Group>
         </Box>

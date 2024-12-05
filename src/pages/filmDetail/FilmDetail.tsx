@@ -9,28 +9,28 @@ import { useParams } from "react-router-dom";
 const FilmDetail: FC = () => {
     const { filmId } = useParams();
 
-    const { data: film, isLoading: isFilmLoading } = useCustomQuery({
+    const { data: filmData, isLoading: isFilmLoading } = useCustomQuery({
         queryFn: getFilmById,
         queryKey: ["getFilmData"],
         variables: { id: filmId as string },
     });
 
-    const _film = useMemo(() => {
-        if (!film?.data) return null;
+    const _filmData = useMemo(() => {
+        if (!filmData?.data) return null;
 
-        const characterIds = film.data.characters.map((url: string) => getIdFromUrl(url));
-        film.data.characterIds = characterIds;
+        const characterIds = filmData.data.characters.map((url: string) => getIdFromUrl(url));
+        filmData.data.characterIds = characterIds;
 
-        return film.data;
-    }, [film]);
+        return filmData.data;
+    }, [filmData]);
 
     const { data: characterData, isLoading: isCharacterLoading } = useCustomQuery({
-        queryFn: async () => Promise.all(_film?.characterIds.map((id: string) => getPeopleById({ id })) || []),
+        queryFn: async () => Promise.all((_filmData?.characterIds || []).map((id: string) => getPeopleById({ id })) || []),
         queryKey: ["getCharacters"],
-        enabled: !!_film?.characterIds?.length,
+        enabled: !!_filmData?.characterIds?.length,
     });
 
-    const _characterData = useMemo(() => (!characterData ? [] : characterData.map((pilot) => pilot.data)), [characterData]);
+    const characters = useMemo(() => (!characterData ? [] : characterData.map((pilot) => pilot.data.name)), [characterData]);
 
     const isLoading = useMemo(() => isFilmLoading || isCharacterLoading, [isFilmLoading, isCharacterLoading]);
 
@@ -38,13 +38,13 @@ const FilmDetail: FC = () => {
         <Stack spacing="lg">
             <BackButton />
 
-            <FilmInfo isLoading={isLoading} film={_film} />
+            <FilmInfo isLoading={isLoading} film={_filmData} />
 
-            <Cast characterData={_characterData} isLoading={isLoading} />
+            <Cast characters={characters} isLoading={isLoading} />
 
             <Divider />
 
-            <Crew directorName={_film?.director} producerName={_film?.producer} isLoading={isLoading} />
+            <Crew directorName={_filmData?.director || ""} producerName={_filmData?.producer || ""} isLoading={isLoading} />
         </Stack>
     );
 };

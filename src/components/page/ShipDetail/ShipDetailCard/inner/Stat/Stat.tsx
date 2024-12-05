@@ -1,7 +1,7 @@
 import { Box, Center, Flex, Paper, Skeleton, Stack, Text, ThemeIcon } from "@mantine/core";
 import { IconArrowDownRight, IconArrowUpRight } from "@tabler/icons-react";
 import { FC } from "react";
-import { generateRandomNumber } from "../../../../utils/fn";
+import { generateRandomNumber } from "../../../../../../utils/fn";
 import classes from "./Stat.module.scss";
 
 const icons = {

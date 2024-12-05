@@ -1,8 +1,9 @@
-import { Header, Container, Text, Flex, clsx, Group } from "@mantine/core";
+import { Header, Container, Text, Flex, clsx, Group, Image } from "@mantine/core";
 import classes from "./Header.module.scss";
 import { ProfileButton } from "./inner/ProfileButton";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import LogoPng from "../../../assets/logo.png";
 
 const links = [
     { link: "/", label: "Home" },
@@ -38,9 +39,7 @@ export const AppHeader = () => {
             <Container w="100%" size="xl">
                 <Flex align="center" justify="space-between">
                     {/* Logo */}
-                    <Text weight={700} size="xl">
-                        Logo
-                    </Text>
+                    <Image src={LogoPng} alt="logo" width={150} />
 
                     {/* Menu */}
                     <Group spacing="sm">{items}</Group>

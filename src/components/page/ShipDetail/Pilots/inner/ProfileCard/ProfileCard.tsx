@@ -28,7 +28,7 @@ export const ProfileCard: FC<ProfileCardProps> = ({ gender, height, mass, name }
                 <Title order={5} mt="md" align="center">
                     {name}
                 </Title>
-                <Group mt="md" position="center" spacing={30}>
+                <Group mt="md" position="center" spacing="xl">
                     <Box>
                         <Text ta="center" fz="sm" fw={500}>
                             {height}

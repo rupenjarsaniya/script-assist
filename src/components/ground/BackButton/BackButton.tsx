@@ -1,4 +1,4 @@
-import { Flex, Text, UnstyledButton } from "@mantine/core";
+import { Group, Text, UnstyledButton } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons-react";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +10,10 @@ export const BackButton: FC = () => {
 
     return (
         <UnstyledButton onClick={handleBack}>
-            <Flex align="center" gap={3}>
+            <Group align="center" spacing={3}>
                 <IconArrowNarrowLeft size={30} stroke={1.5} />
                 <Text size="md">Back</Text>
-            </Flex>
+            </Group>
         </UnstyledButton>
     );
 };

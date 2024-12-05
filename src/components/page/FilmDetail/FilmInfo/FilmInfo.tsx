@@ -6,7 +6,7 @@ import classes from "./FilmInfo.module.scss";
 
 interface FilmInfoProps {
     isLoading: boolean;
-    film: Pick<FilmData, "release_date" | "title" | "opening_crawl">;
+    film: Pick<FilmData, "release_date" | "title" | "opening_crawl"> | null;
 }
 
 export const FilmInfo: FC<FilmInfoProps> = ({ film, isLoading }) => {

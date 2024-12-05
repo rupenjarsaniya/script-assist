@@ -22,7 +22,7 @@ const Login: FC = () => {
                 notifications.show({ title: "Invalid credentials", message: "Please try again", color: "red" });
             }
         } catch (error) {
-            notifications.show({ title: "Invalid credentials", message: (error as any).message, color: "red" });
+            notifications.show({ title: "Invalid credentials", message: (error as Error).message, color: "red" });
         }
     };
 
@@ -42,6 +42,7 @@ const Login: FC = () => {
                 </Anchor>
             </Text>
 
+            {/* Login form */}
             <Paper shadow="md" p={30} mt={30} radius="md" withBorder bg="#3D4C7E">
                 <Stack spacing={0}>
                     <TextInput

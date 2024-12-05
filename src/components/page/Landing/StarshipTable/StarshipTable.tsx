@@ -1,24 +1,11 @@
-import { FC, useState, useMemo, useCallback, useEffect } from "react";
+import { FC, useState, useMemo, useCallback, useEffect, ChangeEvent, ReactNode } from "react";
 import { IconFilter, IconFilterOff, IconSearch } from "@tabler/icons-react";
-import {
-    Center,
-    Flex,
-    Pagination,
-    Table,
-    Text,
-    TextInput,
-    UnstyledButton,
-    Button,
-    Skeleton,
-    Paper,
-    Group,
-} from "@mantine/core";
+import { Center, Pagination, Table, Text, TextInput, UnstyledButton, Button, Skeleton, Paper, Group } from "@mantine/core";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { FilterInput } from "./inner/FilterInput";
 import { Th } from "./inner/Th";
 
-// Interfaces
 interface RowData {
     name: string;
     model: string;
@@ -26,15 +13,6 @@ interface RowData {
     length: string;
     id: string;
     created: string;
-}
-
-interface ThProps {
-    children: React.ReactNode;
-    width?: string;
-    reversed?: boolean;
-    sorted?: boolean;
-    onSort?: () => void;
-    filter?: React.ReactNode;
 }
 
 function filterData(data: RowData[], filters: Record<string, string>, globalSearch: string): RowData[] {
@@ -84,7 +62,7 @@ function sortData(data: RowData[], sortBy: keyof RowData | null, reversed: boole
     });
 }
 
-function highlightText(text: string, query: string): React.ReactNode {
+function highlightText(text: string, query: string): ReactNode {
     if (!query) return text;
 
     const regex = new RegExp(`(${query})`, "gi");
@@ -169,7 +147,7 @@ export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPa
         [sortBy],
     );
 
-    const handleGlobalSearchChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleGlobalSearchChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setGlobalSearch(event.currentTarget.value);
     }, []);
 

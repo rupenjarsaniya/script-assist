@@ -6,12 +6,12 @@ import { IconX } from "@tabler/icons-react";
 interface FilterInputProps {
     placeholder: string;
     value: string;
+    visible: boolean;
     onChange: (value: string) => void;
     onClear: () => void;
-    visible: boolean;
 }
 
-export const FilterInput: FC<FilterInputProps> = ({ placeholder, value, onChange, onClear, visible }) => {
+export const FilterInput: FC<FilterInputProps> = ({ placeholder, value, visible, onChange, onClear }) => {
     if (!visible) return null;
 
     return (

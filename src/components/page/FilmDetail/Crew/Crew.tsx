@@ -1,6 +1,7 @@
 import { Box, Group, Skeleton, Stack, Title } from "@mantine/core";
 import { FC } from "react";
 import { CharacterCard } from "../inner/CharacterCard";
+import classes from "./Crew.module.scss";
 
 interface CastProps {
     isLoading: boolean;
@@ -14,7 +15,7 @@ export const Crew: FC<CastProps> = ({ directorName, producerName, isLoading }) =
             <Title order={3} weight={600} mb="lg">
                 {isLoading ? <Skeleton height={20} width="30%" /> : "Crew"}
             </Title>
-            <Group spacing="lg">
+            <Group noWrap className={classes.overflow} spacing={40} align="start">
                 {isLoading ? (
                     [...Array(2)].map((_, index) => (
                         <Stack align="center" key={index}>

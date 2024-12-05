@@ -17,7 +17,22 @@ export interface StarshipData {
     created: string;
     edited: string;
     url: string;
+    id?: string;
+    pilotIds?: string[];
+    filmIds?: string[];
+}
+
+export interface StarshipResponse {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: StarshipData[];
+}
+
+export interface GetAllStarShipsVariables {
+    page: number;
+}
+
+export interface GetStarShipByIdVariables {
     id: string;
-    pilotIds: string[];
-    filmIds: string[];
 }

@@ -48,7 +48,9 @@ export const Films: FC<FilmsProps> = ({ data, isLoading }) => {
                     ))}
                 </Grid>
             ) : (
-                <Text c="dimmed">No known films</Text>
+                <Text c="dimmed" size="sm">
+                    No known films
+                </Text>
             )}
         </Box>
     );
