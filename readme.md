@@ -6,12 +6,7 @@
 -   Optimize layouts for seamless responsiveness across devices (mobile, tablet, and desktop).
 -   Focus on accessibility features such as keyboard navigation and ARIA labels for better user experience.
 
-### 2. **Skeleton Screens**
-
--   Integrate skeleton loaders for a smoother user experience during data fetches.
--   Ensure skeleton designs align with the UI theme for consistency.
-
-### 3. **State Management with Zustand**
+### 2. **State Management with Zustand**
 
 -   Implement a Zustand-based store for authentication management.
 -   Explore utilizing Zustand for managing other modular states like:
@@ -19,7 +14,7 @@
     -   **Selected Films:** Manage the state for films chosen by the user.
 -   Note: Avoid overuse of a single data source for multiple places to maintain clean and efficient state handling.
 
-### 4. **Backend Enhancements**
+### 3. **Backend Enhancements**
 
 -   Develop and integrate a backend service with the following features:
     -   **Query Operations:** Allow advanced querying capabilities for data.
