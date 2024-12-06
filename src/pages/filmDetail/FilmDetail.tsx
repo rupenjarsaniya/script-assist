@@ -11,7 +11,7 @@ const FilmDetail: FC = () => {
 
     const { data: filmData, isLoading: isFilmLoading } = useCustomQuery({
         queryFn: getFilmById,
-        queryKey: ["getFilmData"],
+        queryKey: ["getFilmDetail"],
         variables: { id: filmId as string },
     });
 

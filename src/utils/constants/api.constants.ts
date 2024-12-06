@@ -1,4 +1,4 @@
-const BASE_URL = "https://swapi.dev/api";
+const BASE_URL = "/api";
 
 export const API = {
     BASE: BASE_URL,

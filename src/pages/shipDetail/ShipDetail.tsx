@@ -39,13 +39,13 @@ const ShipDetail: FC = () => {
 
     const { data: pilotData, isLoading: isPilotLoading } = useCustomQuery({
         queryFn: async () => Promise.all((_starshipData?.pilotIds || []).map((id: string) => getPeopleById({ id })) || []),
-        queryKey: ["getPilotData"],
+        queryKey: ["getPilotData", starshipId],
         enabled: !!_starshipData?.pilots?.length,
     });
 
     const { data: filmData, isLoading: isFilmLoading } = useCustomQuery({
         queryFn: async () => Promise.all((_starshipData?.filmIds || []).map((id: string) => getFilmById({ id })) || []),
-        queryKey: ["getFilmData"],
+        queryKey: ["getFilmData", starshipId],
         enabled: !!_starshipData?.films?.length,
     });
 

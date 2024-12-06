@@ -3,11 +3,12 @@ import { FC } from "react";
 import { StarshipData } from "../../../../../../types";
 import { TableRow } from "./inner/TableRow";
 import classes from "./ShipDetailTable.module.scss";
+import moment from "moment";
 
 interface ShipDetailTableProps {
     data: Pick<
         StarshipData,
-        "length" | "max_atmosphering_speed" | "crew" | "cargo_capacity" | "consumables" | "MGLT"
+        "length" | "max_atmosphering_speed" | "crew" | "cargo_capacity" | "consumables" | "created"
     > | null;
     isLoading: boolean;
 }
@@ -34,7 +35,7 @@ export const ShipDetailTable: FC<ShipDetailTableProps> = ({ data, isLoading }) =
                         <TableRow title="Crew" value={data?.crew || "0"} />
                         <TableRow title="Cargo Capacity" value={`${data?.cargo_capacity || "0"} kg`} />
                         <TableRow title="Consumables" value={data?.consumables || "0"} />
-                        <TableRow title="MGLT" value={data?.MGLT || "0"} />
+                        <TableRow title="Created At" value={moment(data?.created).format("MMMM do YYYY, hh:mm A") || "0"} />
                     </>
                 )}
             </tbody>
