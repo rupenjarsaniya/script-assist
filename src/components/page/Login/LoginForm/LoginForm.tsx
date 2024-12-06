@@ -3,26 +3,30 @@ import { notifications } from "@mantine/notifications";
 import { useState, ChangeEvent, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../../../../store/app.store";
+import { useMutation } from "@tanstack/react-query";
+import { login as mockLogin } from "../../../../services";
 
 export const LoginForm = () => {
     const [form, setForm] = useState({ email: "", password: "" });
     const navigate = useNavigate();
     const { login } = useAppStore();
 
+    const { mutateAsync, isPending } = useMutation({
+        mutationFn: ({ email, password }: { email: string; password: string }) => mockLogin(email, password),
+        onSuccess: (data: any) => {
+            login(data.token, data.user);
+            navigate("/", { replace: true });
+        },
+        onError: (error: Error) => {
+            notifications.show({ title: "Invalid credentials", message: error.message, color: "red" });
+        },
+    });
+
     const handleLogin = async () => {
         try {
-            if (form.email === "rupen@flex.com" && form.password === "1234") {
-                const mockResponse = {
-                    token: "mock-token-123",
-                    user: { id: 1, name: "Rupen" },
-                };
-                login(mockResponse.token, mockResponse.user);
-                navigate("/", { replace: true });
-            } else {
-                notifications.show({ title: "Invalid credentials", message: "Please try again", color: "red" });
-            }
+            await mutateAsync({ email: form.email, password: form.password });
         } catch (error) {
-            notifications.show({ title: "Invalid credentials", message: (error as Error).message, color: "red" });
+            console.log("🚀 ~ handleLogin ~ error:", error);
         }
     };
 
@@ -53,7 +57,7 @@ export const LoginForm = () => {
                     mt="md"
                     mb="xl"
                 />
-                <Button mt="xl" onClick={handleLogin} disabled={isDisabled}>
+                <Button mt="xl" onClick={handleLogin} disabled={isDisabled} loading={isPending}>
                     Sign in
                 </Button>
             </Stack>

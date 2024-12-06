@@ -1,4 +1,4 @@
-import { Button, MantineThemeOverride, PasswordInput } from "@mantine/core";
+import { MantineThemeOverride } from "@mantine/core";
 
 export const theme: MantineThemeOverride = {
     colorScheme: "light",
@@ -89,13 +89,6 @@ export const theme: MantineThemeOverride = {
                 input: {
                     borderRadius: "2rem !important",
                     backgroundColor: "#DCE7FCFF",
-                },
-            },
-        },
-        Button: {
-            styles: {
-                root: {
-                    borderRadius: "2rem !important",
                 },
             },
         },
