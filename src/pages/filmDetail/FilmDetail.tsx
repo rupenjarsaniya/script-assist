@@ -38,13 +38,17 @@ const FilmDetail: FC = () => {
         <Stack spacing="lg">
             <BackButton />
 
-            <FilmInfo isLoading={isLoading} film={_filmData} />
+            <FilmInfo isLoading={isFilmLoading} film={_filmData} />
 
-            <Cast characters={characters} isLoading={isLoading} />
+            <Crew
+                directorName={_filmData?.director || ""}
+                producerName={_filmData?.producer || ""}
+                isLoading={isFilmLoading}
+            />
 
             <Divider />
 
-            <Crew directorName={_filmData?.director || ""} producerName={_filmData?.producer || ""} isLoading={isLoading} />
+            <Cast characters={characters} isLoading={isLoading} />
         </Stack>
     );
 };

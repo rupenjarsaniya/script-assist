@@ -1,6 +1,7 @@
-import { Box, Center, Group, Paper, RingProgress, Skeleton, Stack, Text } from "@mantine/core";
+import { Box, Center, Group, Paper, RingProgress, Text } from "@mantine/core";
 import { IconArrowDownRight, IconArrowUpRight } from "@tabler/icons-react";
 import { FC } from "react";
+import { HyperdriveRatingSkeleton } from "../../../../../skeletons";
 
 const icons = {
     up: IconArrowUpRight,
@@ -20,13 +21,7 @@ export const HyperdriveRating: FC<HyperdriveRatingProps> = ({ config, icon, valu
     return (
         <Paper withBorder radius="md" p="xs" key={"stat.label"}>
             {isLoading ? (
-                <Group>
-                    <Skeleton width={80} height={80} radius="md" />
-                    <Stack>
-                        <Skeleton width={80} height={16} radius="md" />
-                        <Skeleton width={80} height={32} radius="md" />
-                    </Stack>
-                </Group>
+                <HyperdriveRatingSkeleton />
             ) : (
                 <Group>
                     <RingProgress

@@ -1,23 +1,12 @@
 import { FC, useState, useMemo, useCallback, useEffect, ChangeEvent, ReactNode } from "react";
 import { IconFilter, IconFilterOff, IconSearch } from "@tabler/icons-react";
-import {
-    Center,
-    Pagination,
-    Table,
-    Text,
-    TextInput,
-    UnstyledButton,
-    Button,
-    Skeleton,
-    Paper,
-    Group,
-    Box,
-} from "@mantine/core";
+import { Center, Pagination, Table, Text, TextInput, UnstyledButton, Button, Paper, Group, Box } from "@mantine/core";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { FilterInput } from "./inner/FilterInput";
 import { Th } from "./inner/Th";
 import classes from "./StarshipTable.module.scss";
+import { StarshipTableSkeleton } from "../../../skeletons";
 
 interface RowData {
     name: string;
@@ -139,29 +128,6 @@ export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPa
                 >
                     View
                 </Button>
-            </td>
-        </tr>
-    ));
-
-    const skeletonRows = Array.from({ length: 10 }).map((_, index) => (
-        <tr key={index}>
-            <td>
-                <Skeleton height={30} width="80%" />
-            </td>
-            <td>
-                <Skeleton height={30} width="60%" />
-            </td>
-            <td>
-                <Skeleton height={30} width="50%" />
-            </td>
-            <td>
-                <Skeleton height={30} width="50%" />
-            </td>
-            <td>
-                <Skeleton height={30} width="70%" />
-            </td>
-            <td>
-                <Skeleton height={30} width="70%" />
             </td>
         </tr>
     ));
@@ -291,7 +257,7 @@ export const StarshipTable: FC<StarshipTableProps> = ({ data, isLoading, totalPa
                 </thead>
                 <tbody>
                     {isLoading ? (
-                        skeletonRows
+                        <StarshipTableSkeleton />
                     ) : rows.length > 0 ? (
                         rows
                     ) : (

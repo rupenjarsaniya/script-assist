@@ -1,8 +1,9 @@
-import { Box, Grid, Group, Skeleton, Text, Title } from "@mantine/core";
+import { Box, Grid, Text, Title } from "@mantine/core";
 import { FC } from "react";
 import { MovieCard } from "./inner/MovieCard";
 import { FilmData } from "../../../../types";
 import { useNavigate } from "react-router-dom";
+import { FilmsSkeleton } from "../../../skeletons";
 
 interface FilmsProps {
     data: FilmData[];
@@ -16,27 +17,15 @@ export const Films: FC<FilmsProps> = ({ data, isLoading }) => {
         navigate(`/film-detail/${film.id}`);
     };
 
+    if (isLoading) return <FilmsSkeleton />;
+
     return (
         <Box>
-            {isLoading ? (
-                <Skeleton height={20} width="30%" mb="lg" />
-            ) : (
-                <Title order={4} weight={500} mb="md">
-                    Films
-                </Title>
-            )}
+            <Title order={4} weight={500} mb="md">
+                Films
+            </Title>
 
-            {isLoading ? (
-                <Group spacing="lg">
-                    {[...Array(4)].map((_, index) => (
-                        <Box key={index}>
-                            <Skeleton height={250} width={200} radius="md" />
-                            <Skeleton height={20} width={150} mt="xs" />
-                            <Skeleton height={15} width={100} mt="xs" />
-                        </Box>
-                    ))}
-                </Group>
-            ) : data.length > 0 ? (
+            {data.length > 0 ? (
                 <Grid>
                     {data.map((film, index) => (
                         <MovieCard

@@ -78,26 +78,21 @@ const ShipDetail: FC = () => {
         return { value, color };
     }, [_starshipData]);
 
-    const isLoading = useMemo(
-        () => isStarshipLoading || isPilotLoading || isFilmLoading,
-        [isStarshipLoading, isPilotLoading, isFilmLoading],
-    );
-
     return (
         <Box>
             {/* Back button */}
             <BackButton />
 
             {/* Ship detail card */}
-            <ShipDetailCard isLoading={isLoading} hyperdriveConfig={hyperdriveConfig} starshipData={_starshipData} />
+            <ShipDetailCard isLoading={isStarshipLoading} hyperdriveConfig={hyperdriveConfig} starshipData={_starshipData} />
 
             {/* Pilots section */}
-            <Pilots data={_pilotData} isLoading={isLoading} />
+            <Pilots data={_pilotData} isLoading={isStarshipLoading || isPilotLoading} />
 
             <Divider my="lg" />
 
             {/* Films section */}
-            <Films data={_filmData} isLoading={isLoading} />
+            <Films data={_filmData} isLoading={isStarshipLoading || isFilmLoading} />
         </Box>
     );
 };

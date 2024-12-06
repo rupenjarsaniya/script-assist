@@ -1,9 +1,10 @@
-import { Skeleton, Table } from "@mantine/core";
+import { Table } from "@mantine/core";
 import { FC } from "react";
 import { StarshipData } from "../../../../../../types";
 import { TableRow } from "./inner/TableRow";
 import classes from "./ShipDetailTable.module.scss";
 import moment from "moment";
+import { ShipDetailTableSkeleton } from "../../../../../skeletons";
 
 interface ShipDetailTableProps {
     data: Pick<
@@ -18,16 +19,7 @@ export const ShipDetailTable: FC<ShipDetailTableProps> = ({ data, isLoading }) =
         <Table highlightOnHover={!isLoading} withColumnBorders={false} withBorder={false} className={classes.root}>
             <tbody>
                 {isLoading ? (
-                    [...Array(6)].map((_, index) => (
-                        <tr key={index}>
-                            <td>
-                                <Skeleton width={100} height={20} />
-                            </td>
-                            <td>
-                                <Skeleton width={100} height={20} />
-                            </td>
-                        </tr>
-                    ))
+                    <ShipDetailTableSkeleton />
                 ) : (
                     <>
                         <TableRow title="Length" value={`${data?.length} meters`} />

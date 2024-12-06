@@ -1,10 +1,11 @@
-import { Card, Group, Skeleton, Title, Badge, Divider, Stack, Text } from "@mantine/core";
+import { Card, Group, Title, Badge, Divider, Stack, Text } from "@mantine/core";
 import { FC } from "react";
 import { StarshipData } from "../../../../types";
 import classes from "./ShipDetailCard.module.scss";
 import { ShipDetailTable } from "./inner/ShipDetailTable";
 import { HyperdriveRating } from "./inner/HyperdriveRating";
 import { Stat } from "./inner/Stat";
+import { ShipDetailCardSkeleton } from "../../../skeletons";
 
 interface ShipDetailCardProps {
     isLoading: boolean;
@@ -15,43 +16,32 @@ interface ShipDetailCardProps {
 export const ShipDetailCard: FC<ShipDetailCardProps> = ({ isLoading, hyperdriveConfig, starshipData }) => {
     return (
         <Card shadow="sm" padding="lg" radius="md" my="lg" withBorder>
-            <Group position="apart">
-                {isLoading ? (
-                    <Skeleton width={100} height={40} />
-                ) : (
-                    <Title order={2} weight={600}>
-                        {starshipData?.name}
-                    </Title>
-                )}
-                <Group>
-                    {isLoading ? (
-                        <>
-                            <Skeleton width={100} height={20} />
-                            <Skeleton width={100} height={20} />
-                            <Skeleton width={100} height={20} />
-                        </>
-                    ) : (
-                        <>
+            {isLoading ? (
+                <ShipDetailCardSkeleton />
+            ) : (
+                <>
+                    <Group position="apart">
+                        <Title order={2} weight={600}>
+                            {starshipData?.name}
+                        </Title>
+                        <Group>
                             <Badge color="green">Class: {starshipData?.starship_class}</Badge>
                             <Badge color="blue">Hyperdrive: {starshipData?.hyperdrive_rating}</Badge>
                             <Badge color="yellow">Speed: {starshipData?.MGLT} MGLT</Badge>
-                        </>
-                    )}
-                </Group>
-            </Group>
+                        </Group>
+                    </Group>
 
-            {isLoading ? (
-                <Skeleton width="100%" height={20} mt="sm" />
-            ) : (
-                <Text size="sm" c="dimmed">
-                    {starshipData?.model} by {starshipData?.manufacturer}
-                </Text>
+                    <Text size="sm" c="dimmed">
+                        {starshipData?.model} by {starshipData?.manufacturer}
+                    </Text>
+                </>
             )}
 
             <Divider my="lg" />
 
             <Group spacing="lg">
                 <ShipDetailTable data={starshipData} isLoading={isLoading} />
+
                 <Stack className={classes.statWraper} spacing="lg">
                     <HyperdriveRating
                         config={[hyperdriveConfig]}
