@@ -44,7 +44,7 @@ export const ShipDetailCard: FC<ShipDetailCardProps> = ({ isLoading, hyperdriveC
 
                 <Stack className={classes.statWraper} spacing="lg">
                     <HyperdriveRating
-                        config={[hyperdriveConfig]}
+                        config={hyperdriveConfig}
                         icon="up"
                         value={starshipData?.hyperdrive_rating || "0"}
                         isLoading={isLoading}

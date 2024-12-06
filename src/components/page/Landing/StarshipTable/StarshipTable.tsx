@@ -1,6 +1,6 @@
 import { FC, useState, useMemo, useCallback, useEffect, ChangeEvent, ReactNode } from "react";
 import { IconFilter, IconFilterOff, IconSearch } from "@tabler/icons-react";
-import { Center, Pagination, Table, Text, TextInput, UnstyledButton, Button, Paper, Group, Box } from "@mantine/core";
+import { Center, Pagination, Table, Text, TextInput, UnstyledButton, Button, Paper, Group } from "@mantine/core";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { FilterInput } from "./inner/FilterInput";
@@ -40,15 +40,6 @@ function filterData(data: RowData[], filters: Record<string, string>, globalSear
 
         const matchesFilters = Object.entries(filters).every(([key, filterValue]) => {
             if (!filterValue) return true;
-
-            // Special handling for the "created" field in filters
-            if (key === "created") {
-                const formattedDate = moment(item[key as keyof RowData])
-                    .format("DD MMM YYYY")
-                    .toLowerCase();
-                return formattedDate.includes(filterValue.toLowerCase());
-            }
-
             return item[key as keyof RowData]?.toLowerCase().includes(filterValue.toLowerCase());
         });
 

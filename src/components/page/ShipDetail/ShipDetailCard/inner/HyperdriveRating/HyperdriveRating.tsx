@@ -9,7 +9,7 @@ const icons = {
 };
 
 interface HyperdriveRatingProps {
-    config: { value: number; color: string }[];
+    config: { value: number; color: string };
     icon: "up" | "down";
     value: string;
     isLoading: boolean;
@@ -28,7 +28,7 @@ export const HyperdriveRating: FC<HyperdriveRatingProps> = ({ config, icon, valu
                         size={80}
                         roundCaps
                         thickness={8}
-                        sections={config}
+                        sections={[config]}
                         label={
                             <Center>
                                 <Icon size={20} stroke={1.5} />

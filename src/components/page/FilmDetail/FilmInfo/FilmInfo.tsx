@@ -6,8 +6,8 @@ import classes from "./FilmInfo.module.scss";
 import { FilmInfoSkeleton } from "../../../skeletons";
 
 interface FilmInfoProps {
-    isLoading: boolean;
     film: Pick<FilmData, "release_date" | "title" | "opening_crawl"> | null;
+    isLoading: boolean;
 }
 
 export const FilmInfo: FC<FilmInfoProps> = ({ film, isLoading }) => {
